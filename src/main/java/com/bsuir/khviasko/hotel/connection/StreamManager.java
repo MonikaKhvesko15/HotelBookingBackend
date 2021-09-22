@@ -1,5 +1,7 @@
 package com.bsuir.khviasko.hotel.connection;
 
+import com.bsuir.khviasko.hotel.command.Command;
+import com.bsuir.khviasko.hotel.command.CommandFactory;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -10,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.security.NoSuchAlgorithmException;
 
 public class StreamManager {
     public void start(Socket socket) {
@@ -29,16 +32,13 @@ public class StreamManager {
         }
     }
 
-    private void process(BufferedWriter bufferedWriter, BufferedReader bufferedReader) throws IOException {
-//        ClientDao clientDao = new ClientDao();
-//        OrderDao orderDao = new OrderDao();
-//        AdminDao adminDao = new AdminDao();
+    private void process(BufferedWriter bufferedWriter, BufferedReader bufferedReader) throws IOException{
         Gson gson = new Gson();
         String query = bufferedReader.readLine();
-        //String  = gson.fromJson();
-//        switch (queryDTO.getQuery()) {
-//            case ("signIn"): {
-//            }
-//        }
+        QueryWrapper queryWrapper = gson.fromJson(query, QueryWrapper.class);
+
+        String commandName = queryWrapper.getCommand();
+        Command command = CommandFactory.create(commandName);
+        command.execute(bufferedReader, bufferedWriter, gson);
     }
 }
