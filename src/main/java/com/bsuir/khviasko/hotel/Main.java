@@ -1,6 +1,6 @@
 package com.bsuir.khviasko.hotel;
 
-import com.bsuir.khviasko.hotel.connection.ConnectionManager;
+import com.bsuir.khviasko.hotel.connection.StreamManager;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -13,13 +13,13 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Server starts");
         try {
-            serverSocket = new ServerSocket(8080);
+            serverSocket = new ServerSocket(50000);
             while (true) {
                 clientSocket = serverSocket.accept();
-                System.out.println("New connection on IP-address: " + clientSocket.getInetAddress());
+                System.out.println("New connection IP: " + clientSocket.getInetAddress());
                 Thread thread = new Thread(() -> {
-                                    ConnectionManager service = new ConnectionManager();
-                                    service.start(clientSocket);
+                                    StreamManager manager = new StreamManager();
+                                    manager.start(clientSocket);
                                 }, "");
                 thread.start();
             }

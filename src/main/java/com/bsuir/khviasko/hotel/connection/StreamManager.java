@@ -11,7 +11,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
-public class ConnectionManager {
+public class StreamManager {
     public void start(Socket socket) {
         try {
             OutputStream outputStream = socket.getOutputStream();
