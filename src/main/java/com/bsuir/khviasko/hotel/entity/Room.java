@@ -11,7 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -22,6 +21,8 @@ import java.util.Set;
 @Data
 @EqualsAndHashCode
 public class Room implements Serializable {
+    public static final String ROOM_CLASS_NAME = "Room";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -42,6 +43,6 @@ public class Room implements Serializable {
 
     private String description;
 
-    @OneToMany(mappedBy = "room", fetch= FetchType.EAGER)
+    @OneToMany(mappedBy = "room", fetch = FetchType.EAGER)
     private Set<Comment> comments;
 }

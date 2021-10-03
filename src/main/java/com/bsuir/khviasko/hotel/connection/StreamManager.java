@@ -12,7 +12,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.security.NoSuchAlgorithmException;
 
 public class StreamManager {
     public void start(Socket socket) {
@@ -32,13 +31,13 @@ public class StreamManager {
         }
     }
 
-    private void process(BufferedWriter bufferedWriter, BufferedReader bufferedReader) throws IOException{
+    private void process(BufferedWriter bufferedWriter, BufferedReader bufferedReader) throws IOException {
         Gson gson = new Gson();
         String query = bufferedReader.readLine();
         QueryWrapper queryWrapper = gson.fromJson(query, QueryWrapper.class);
 
         String commandName = queryWrapper.getCommand();
         Command command = CommandFactory.create(commandName);
-        command.execute(bufferedReader, bufferedWriter, gson);
+        command.execute(bufferedReader, bufferedWriter, gson, queryWrapper);
     }
 }

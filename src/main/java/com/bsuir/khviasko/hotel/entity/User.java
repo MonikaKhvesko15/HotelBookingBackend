@@ -18,6 +18,8 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode
 public class User implements Serializable {
+    public static final String USER_CLASS_NAME = "User";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

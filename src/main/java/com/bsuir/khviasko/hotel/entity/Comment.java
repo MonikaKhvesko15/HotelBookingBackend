@@ -20,6 +20,8 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode
 public class Comment implements Serializable {
+    public static final String COMMENT_CLASS_NAME = "Comment";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

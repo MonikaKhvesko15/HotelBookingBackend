@@ -1,16 +1,16 @@
-package com.bsuir.khviasko.hotel.repository;
+package com.bsuir.khviasko.hotel.repository.user.impl;
 
 import com.bsuir.khviasko.hotel.config.HibernateSessionCreator;
 import com.bsuir.khviasko.hotel.entity.User;
+import com.bsuir.khviasko.hotel.repository.AbstractRepository;
+import com.bsuir.khviasko.hotel.repository.user.UserRepository;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-public class UserRepository {
-    public User findById(Long id) {
-        Session session = HibernateSessionCreator.getSessionFactory().openSession();
-        User user = session.get(User.class, id);
-        session.close();
-        return user;
+public class UserRepositoryImpl extends AbstractRepository<User> implements UserRepository {
+
+    public UserRepositoryImpl() {
+        super(User.class, User.USER_CLASS_NAME);
     }
 
     public User findByUsernameAndPassword(String username, String password) {

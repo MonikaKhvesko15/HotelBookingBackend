@@ -24,6 +24,8 @@ import java.util.List;
 @Data
 @EqualsAndHashCode
 public class Reservation implements Serializable {
+    public static final String RESERVATION_CLASS_NAME = "Reservation";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,8 +1,10 @@
 package com.bsuir.khviasko.hotel.command.impl;
 
 import com.bsuir.khviasko.hotel.command.Command;
+import com.bsuir.khviasko.hotel.connection.QueryWrapper;
 import com.bsuir.khviasko.hotel.entity.User;
-import com.bsuir.khviasko.hotel.repository.UserRepository;
+import com.bsuir.khviasko.hotel.repository.user.UserRepository;
+import com.bsuir.khviasko.hotel.repository.user.impl.UserRepositoryImpl;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -14,11 +16,11 @@ public class LoginCommand implements Command {
     UserRepository userRepository;
 
     public LoginCommand() {
-        this.userRepository = new UserRepository();
+        this.userRepository = new UserRepositoryImpl();
     }
 
     @Override
-    public void execute(BufferedReader reader, BufferedWriter writer, Gson gson) throws IOException {
+    public void execute(BufferedReader reader, BufferedWriter writer, Gson gson, QueryWrapper queryWrapper) throws IOException {
         String username = reader.readLine();
         String password = reader.readLine();
         User user = userRepository.findByUsernameAndPassword(username, password);
