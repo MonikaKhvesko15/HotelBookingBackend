@@ -30,7 +30,7 @@ public class User implements Serializable {
 
     private String firstname;
 
-    private String surname;
+    private String lastname;
 
     @Column(name = "is_blocked", columnDefinition = "boolean default false", insertable = false)
     private boolean isBlocked;
