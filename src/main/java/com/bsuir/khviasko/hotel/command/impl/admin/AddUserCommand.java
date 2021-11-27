@@ -1,4 +1,4 @@
-package com.bsuir.khviasko.hotel.command.impl.common;
+package com.bsuir.khviasko.hotel.command.impl.admin;
 
 import com.bsuir.khviasko.hotel.command.Command;
 import com.bsuir.khviasko.hotel.connection.QueryWrapper;
@@ -13,11 +13,12 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-public class RegistrationCommand implements Command {
+public class AddUserCommand implements Command {
+
     UserRepository userRepository;
     RoleRepository roleRepository;
 
-    public RegistrationCommand() {
+    public AddUserCommand() {
         this.userRepository = new UserRepositoryImpl();
         this.roleRepository = new RoleRepositoryImpl();
     }

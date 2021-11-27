@@ -2,7 +2,6 @@ package com.bsuir.khviasko.hotel.repository.room.impl;
 
 import com.bsuir.khviasko.hotel.config.HibernateSessionCreator;
 import com.bsuir.khviasko.hotel.entity.Room;
-import com.bsuir.khviasko.hotel.entity.RoomType;
 import com.bsuir.khviasko.hotel.repository.AbstractRepository;
 import com.bsuir.khviasko.hotel.repository.room.RoomRepository;
 import org.hibernate.Session;
@@ -16,6 +15,10 @@ import java.util.Optional;
 
 public class RoomRepositoryImpl extends AbstractRepository<Room> implements RoomRepository {
 
+    private static final String STANDARD = "STANDARD";
+    private static final String BUSINESS = "BUSINESS";
+    private static final String LUX = "LUX";
+
     public RoomRepositoryImpl() {
         super(Room.class, Room.ROOM_CLASS_NAME);
     }
@@ -26,28 +29,28 @@ public class RoomRepositoryImpl extends AbstractRepository<Room> implements Room
         List<Room> rooms = findAll();
         session.close();
         Map<String, Double> map = new HashMap<>();
-        double standartAveragePrice = sumPriceByType(rooms, RoomType.STANDARD) / countRoomsByType(rooms, RoomType.STANDARD);
-        double businessAveragePrice = sumPriceByType(rooms, RoomType.BUSINESS) / countRoomsByType(rooms, RoomType.BUSINESS);
-        double luxAveragePrice = sumPriceByType(rooms, RoomType.LUX) / countRoomsByType(rooms, RoomType.LUX);
-        map.put(RoomType.STANDARD.name(), standartAveragePrice);
-        map.put(RoomType.BUSINESS.name(), businessAveragePrice);
-        map.put(RoomType.LUX.name(), luxAveragePrice);
+        double standartAveragePrice = sumPriceByType(rooms, STANDARD) / countRoomsByType(rooms, STANDARD);
+        double businessAveragePrice = sumPriceByType(rooms, BUSINESS) / countRoomsByType(rooms, BUSINESS);
+        double luxAveragePrice = sumPriceByType(rooms, LUX) / countRoomsByType(rooms, LUX);
+        map.put(STANDARD, standartAveragePrice);
+        map.put(BUSINESS, businessAveragePrice);
+        map.put(LUX, luxAveragePrice);
         return map;
     }
 
-    private Double sumPriceByType(List<Room> rooms, RoomType type){
+    private Double sumPriceByType(List<Room> rooms, String type) {
         return Optional.ofNullable(rooms)
                 .orElse(Collections.emptyList()).stream()
                 .filter(Objects::nonNull)
-                .filter(room -> room.getType().equals(type))
+                .filter(room -> room.getRoomType().equals(type))
                 .mapToDouble(Room::getPrice).sum();
     }
 
-    private long countRoomsByType(List<Room> rooms, RoomType type){
+    private long countRoomsByType(List<Room> rooms, String type) {
         return Optional.ofNullable(rooms)
                 .orElse(Collections.emptyList()).stream()
                 .filter(Objects::nonNull)
-                .filter(room -> room.getType().equals(type))
+                .filter(room -> room.getRoomType().equals(type))
                 .count();
     }
 }

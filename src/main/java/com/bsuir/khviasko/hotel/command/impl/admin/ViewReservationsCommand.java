@@ -1,4 +1,4 @@
-package com.bsuir.khviasko.hotel.command.impl.user;
+package com.bsuir.khviasko.hotel.command.impl.admin;
 
 import com.bsuir.khviasko.hotel.command.Command;
 import com.bsuir.khviasko.hotel.connection.QueryWrapper;

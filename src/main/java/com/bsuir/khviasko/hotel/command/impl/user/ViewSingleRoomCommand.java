@@ -20,7 +20,8 @@ public class ViewSingleRoomCommand implements Command {
 
     @Override
     public void execute(BufferedReader reader, BufferedWriter writer, Gson gson, QueryWrapper queryWrapper) throws IOException {
-        Room room = roomRepository.findById(queryWrapper.getRoomId());
+        String roomId = reader.readLine();
+        Room room = roomRepository.findById(roomId);
         writer.write(gson.toJson(room) + "\n");
         writer.flush();
     }

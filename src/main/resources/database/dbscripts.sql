@@ -4,8 +4,8 @@ USE hotel;
 
 CREATE TABLE IF NOT EXISTS roles
 (
-    id   BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    role ENUM ('ADMIN','USER')
+    id   INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    role_value	 VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS users
@@ -15,8 +15,7 @@ CREATE TABLE IF NOT EXISTS users
     password  VARCHAR(50) NOT NULL,
     firstname VARCHAR(20) NOT NULL,
     surname   VARCHAR(20) NOT NULL,
-    role_id     BIGINT NOT NULL,
-    is_blocked BIT DEFAULT 0,
+    role_id     INT NOT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (role_id) REFERENCES roles (id),
@@ -27,7 +26,7 @@ CREATE TABLE IF NOT EXISTS rooms
 (
     id        INT AUTO_INCREMENT,
     room_number VARCHAR(20) NOT NULL UNIQUE,
-    room_type   ENUM ('STANDARD', 'BUSINESS','LUX'),
+    room_type   VARCHAR(20) NOT NULL,
     capacity INT,
     price DECIMAL NOT NULL,
     is_available BIT DEFAULT 0,
@@ -36,38 +35,26 @@ CREATE TABLE IF NOT EXISTS rooms
     PRIMARY KEY (id)
 );
 
+CREATE TABLE IF NOT EXISTS room_status
+(
+    id   INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    status_value	 VARCHAR(20) NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS reservations
 (
     id   INT AUTO_INCREMENT,
-    start_date  DATE NOT NULL,
-    end_date    DATE NOT NULL,
+    start_date  DATE,
+    end_date    DATE,
     total_price DECIMAL NOT NULL,
-    status      ENUM ('ACCEPTED','UNDER_CONSIDERATION','COMPLETED','REJECTED') DEFAULT 'UNDER_CONSIDERATION',
+    status_id   INT  NOT NULL,
     user_id     INT  NOT NULL,
     room_id     INT  NOT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (room_id) REFERENCES rooms (id)
-);
-
-CREATE TABLE IF NOT EXISTS rooms_reservations
-(
-    room_id INT NOT NULL REFERENCES rooms (id),
-    reservation_id INT NOT NULL REFERENCES reservations (id)
-)
-
-CREATE TABLE IF NOT EXISTS comments
-(
-    id   INT AUTO_INCREMENT,
-    create_date    DATE NOT NULL,
-    text_comment VARCHAR(300) NOT NULL,
-    user_id     INT  NOT NULL,
-    room_id     INT  NOT NULL,
-
-    PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (room_id) REFERENCES rooms (id)
+    FOREIGN KEY (room_id) REFERENCES rooms (id),
+    FOREIGN KEY (status_id) REFERENCES room_status (id)
 );
 
 

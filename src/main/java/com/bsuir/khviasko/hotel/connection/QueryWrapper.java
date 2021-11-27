@@ -6,4 +6,5 @@ import lombok.Data;
 public class QueryWrapper {
     private final String command;
     private final String userId;
+    private final String role;
 }

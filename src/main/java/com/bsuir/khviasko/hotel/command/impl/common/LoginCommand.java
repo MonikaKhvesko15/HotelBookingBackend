@@ -26,11 +26,7 @@ public class LoginCommand implements Command {
         User user = userRepository.findByUsernameAndPassword(username, password);
 
         if (Objects.nonNull(user)) {
-            if (!user.isBlocked()) {
-                writer.write(gson.toJson(user) + "\n");
-            } else {
-                writer.write("User is blocked" + "\n");
-            }
+            writer.write(gson.toJson(user) + "\n");
         } else {
             writer.write("User not found" + "\n");
         }

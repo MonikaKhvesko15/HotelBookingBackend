@@ -1,7 +1,7 @@
 package com.bsuir.khviasko.hotel.config;
 
-import com.bsuir.khviasko.hotel.entity.Comment;
 import com.bsuir.khviasko.hotel.entity.Reservation;
+import com.bsuir.khviasko.hotel.entity.ReservationStatus;
 import com.bsuir.khviasko.hotel.entity.Role;
 import com.bsuir.khviasko.hotel.entity.Room;
 import com.bsuir.khviasko.hotel.entity.User;
@@ -19,11 +19,11 @@ public class HibernateSessionCreator {
         if (sessionFactory == null) {
             try {
                 Configuration configuration = new Configuration().configure();
-                configuration.addAnnotatedClass(Comment.class);
-                configuration.addAnnotatedClass(Reservation.class);
+                configuration.addAnnotatedClass(User.class);
                 configuration.addAnnotatedClass(Role.class);
                 configuration.addAnnotatedClass(Room.class);
-                configuration.addAnnotatedClass(User.class);
+                configuration.addAnnotatedClass(ReservationStatus.class);
+                configuration.addAnnotatedClass(Reservation.class);
                 StandardServiceRegistryBuilder builder =
                         new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
                 sessionFactory = configuration.buildSessionFactory(builder.build());

@@ -1,4 +1,4 @@
-package com.bsuir.khviasko.hotel.command.impl.common;
+package com.bsuir.khviasko.hotel.command.impl.admin;
 
 import com.bsuir.khviasko.hotel.command.Command;
 import com.bsuir.khviasko.hotel.connection.QueryWrapper;
@@ -8,12 +8,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-public class LogoutCommand implements Command {
-
-    public LogoutCommand() {
-
-    }
-
+public class ProfitReportCommand implements Command {
     @Override
     public void execute(BufferedReader reader, BufferedWriter writer, Gson gson, QueryWrapper queryWrapper) throws IOException {
 

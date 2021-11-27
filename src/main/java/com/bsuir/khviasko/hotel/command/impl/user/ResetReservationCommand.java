@@ -2,6 +2,7 @@ package com.bsuir.khviasko.hotel.command.impl.user;
 
 import com.bsuir.khviasko.hotel.command.Command;
 import com.bsuir.khviasko.hotel.connection.QueryWrapper;
+import com.bsuir.khviasko.hotel.entity.Reservation;
 import com.bsuir.khviasko.hotel.repository.reservation.ReservationRepository;
 import com.bsuir.khviasko.hotel.repository.reservation.impl.ReservationRepositoryImpl;
 import com.google.gson.Gson;
@@ -19,6 +20,7 @@ public class ResetReservationCommand implements Command {
 
     @Override
     public void execute(BufferedReader reader, BufferedWriter writer, Gson gson, QueryWrapper queryWrapper) throws IOException {
-        //todo: add logic
+        Reservation reservation = gson.fromJson(reader.readLine(), Reservation.class);
+        reservationRepository.delete(reservation);
     }
 }

@@ -3,13 +3,13 @@ package com.bsuir.khviasko.hotel.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 
@@ -30,13 +30,10 @@ public class User implements Serializable {
 
     private String firstname;
 
-    private String lastname;
+    private String surname;
 
-    @Column(name = "is_blocked", columnDefinition = "boolean default false", insertable = false)
-    private boolean isBlocked;
-
-    @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
 
 }

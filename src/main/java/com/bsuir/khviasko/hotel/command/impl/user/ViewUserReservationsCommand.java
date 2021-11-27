@@ -10,14 +10,13 @@ import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class ReservationsReportCommand implements Command {
+public class ViewUserReservationsCommand implements Command {
     ReservationRepository reservationRepository;
 
-    public ReservationsReportCommand() {
+    public ViewUserReservationsCommand() {
         this.reservationRepository = new ReservationRepositoryImpl();
     }
 
@@ -25,16 +24,7 @@ public class ReservationsReportCommand implements Command {
     public void execute(BufferedReader reader, BufferedWriter writer, Gson gson, QueryWrapper queryWrapper) throws IOException {
         User user = gson.fromJson(reader.readLine(), User.class);
         List<Reservation> reservations = reservationRepository.getUserReservations(user);
-        FileWriter fileWriter = new FileWriter("C:/report.txt");
-        reservations.forEach(reservation -> {
-            try {
-                fileWriter.write(reservation.getData());
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
-        writer.close();
+        writer.write(gson.toJson(reservations) + "\n");
+        writer.flush();
     }
 }

@@ -5,7 +5,6 @@ import com.bsuir.khviasko.hotel.entity.User;
 import com.bsuir.khviasko.hotel.repository.AbstractRepository;
 import com.bsuir.khviasko.hotel.repository.user.UserRepository;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 public class UserRepositoryImpl extends AbstractRepository<User> implements UserRepository {
@@ -20,24 +19,7 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
                 session.createQuery("from User u where u.login =:username and u.password=:password");
         query.setParameter("username", username);
         query.setParameter("password", password);
-        User user =  (User) query.uniqueResult();
-        session.close();
-        return user;
-    }
-
-    @Override
-    public void addNewUser(User user) {
-        Session session = HibernateSessionCreator.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(user);
-        transaction.commit();
-        session.close();
-    }
-
-    @Override
-    public User findByID(String id) {
-        Session session = HibernateSessionCreator.getSessionFactory().openSession();
-        User user = session.get(User.class, id);
+        User user = (User) query.uniqueResult();
         session.close();
         return user;
     }
