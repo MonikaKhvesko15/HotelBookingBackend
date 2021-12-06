@@ -1,5 +1,6 @@
 package com.bsuir.khviasko.hotel.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

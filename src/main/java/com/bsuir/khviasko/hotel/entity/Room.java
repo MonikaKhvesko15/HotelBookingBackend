@@ -42,5 +42,5 @@ public class Room implements Serializable {
     private String description;
 
     @OneToOne(mappedBy="room")
-    private Reservation reservation;
+    private transient Reservation reservation;
 }

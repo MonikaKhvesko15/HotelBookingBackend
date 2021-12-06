@@ -46,6 +46,6 @@ public class User implements Serializable {
     private Role role;
 
     @OneToOne(mappedBy = "user")
-    private Reservation reservation;
+    private transient Reservation reservation;
 
 }

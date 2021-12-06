@@ -1,8 +1,6 @@
 
 k
 ;src/main/java/com/bsuir/khviasko/hotel/command/Command.java,a\b\ab4322f2b75e900a714e35c8d35551c5e0cf7c4f
-à
-Xsrc/main/java/com/bsuir/khviasko/hotel/command/impl/user/ViewUserInformationCommand.java,5\6\5642a348c63d5581c6879b58778d5c115df374fc
 z
 Jsrc/main/java/com/bsuir/khviasko/hotel/repository/room/RoomRepository.java,b\7\b7e83dd9d6dc0a500d712c0fc12e0e3ce75e306a
 ù
@@ -14,18 +12,6 @@ Ssrc/main/java/com/bsuir/khviasko/hotel/repository/role/impl/RoleRepositoryImpl.
 z
 Jsrc/main/java/com/bsuir/khviasko/hotel/repository/role/RoleRepository.java,9\9\9931991ddf2444d70e7c8318d980ed17dc54d631
 à
-Xsrc/main/java/com/bsuir/khviasko/hotel/command/impl/user/EditUserInformationCommand.java,e\b\eb4adaaef5f68ad102c7d69ad3e81fbb76edbdbc
-É
-Ssrc/main/java/com/bsuir/khviasko/hotel/command/impl/user/ViewSingleRoomCommand.java,f\c\fceb4ae7b3544be87562d0788b606a587e84dae9
-~
-Nsrc/main/java/com/bsuir/khviasko/hotel/command/impl/user/ViewRoomsCommand.java,c\c\cc7420c9ad336995325449e30b66745007fddd28
-à
 Xsrc/main/java/com/bsuir/khviasko/hotel/repository/reservation/ReservationRepository.java,5\2\523402286eaf004f1cc7c4655c607ef37311ba29
-Ö
-Usrc/main/java/com/bsuir/khviasko/hotel/command/impl/user/ResetReservationCommand.java,7\7\77f5ffc29210f3eda525a00d42a3d2425c3b6a35
-á
-Wsrc/main/java/com/bsuir/khviasko/hotel/command/impl/user/ReservationsReportCommand.java,b\f\bf72588eb3730f8a3b60cf30fbefe718e95b4d50
-É
-Ssrc/main/java/com/bsuir/khviasko/hotel/command/impl/user/RoomPriceChartCommand.java,4\8\4867fed3ef6c412834ebd4c8b4ad1a44121927fe
 É
 Ssrc/main/java/com/bsuir/khviasko/hotel/repository/room/impl/RoomRepositoryImpl.java,b\6\b6b19c53a5620ae1f470159f419a2c5b2986dfea

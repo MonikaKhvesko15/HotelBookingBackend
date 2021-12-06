@@ -1,5 +1,6 @@
 package com.bsuir.khviasko.hotel.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -46,13 +47,4 @@ public class Reservation implements Serializable {
     @ManyToOne (optional = false, fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn (name="reservation_status_id")
     private ReservationStatus reservationStatus;
-
-    public String getData() {
-        return "reservation ID: " + id.toString() + "\n" +
-                "duration: " + duration + "\n" +
-                "total price: " + totalPrice + "\n" +
-                "user ID: " + user.getId().toString() + "\n" +
-                "room ID: " + room.getId().toString() + "\n" +
-                "reservation status: " + reservationStatus.getStatusValue() + "\n\n";
-    }
 }
