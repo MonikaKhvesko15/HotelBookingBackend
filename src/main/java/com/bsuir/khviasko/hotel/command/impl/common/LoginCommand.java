@@ -28,7 +28,7 @@ public class LoginCommand implements Command {
         if (Objects.nonNull(user)) {
             writer.write(gson.toJson(user) + "\n");
         } else {
-            writer.write("User not found" + "\n");
+            writer.write(gson.toJson("REJECTED") + "\n");
         }
         writer.flush();
     }

@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.sql.SQLException;
 
 public class StreamManager {
     public void start(Socket socket) {

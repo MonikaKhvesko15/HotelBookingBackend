@@ -24,8 +24,17 @@ public class RegistrationCommand implements Command {
 
     @Override
     public void execute(BufferedReader reader, BufferedWriter writer, Gson gson, QueryWrapper queryWrapper) throws IOException {
-        User user = gson.fromJson(reader.readLine(), User.class);
-        user.setRole(roleRepository.findById("1"));
+        String firstname = reader.readLine();
+        String surname = reader.readLine();
+        String username = reader.readLine();
+        String password = reader.readLine();
+        User user = new User();
+        user.setFirstname(firstname);
+        user.setSurname(surname);
+        user.setLogin(username);
+        user.setPassword(password);
+        user.setDeleted(false);
+        user.setRole(roleRepository.findById("2"));
         userRepository.create(user);
     }
 }

@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Server starts");
         try {
-            serverSocket = new ServerSocket(50000);
+            serverSocket = new ServerSocket(8080);
             while (true) {
                 clientSocket = serverSocket.accept();
                 System.out.println("New connection IP: " + clientSocket.getInetAddress());

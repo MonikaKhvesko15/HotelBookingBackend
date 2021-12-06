@@ -6,7 +6,6 @@ import com.bsuir.khviasko.hotel.entity.User;
 import com.bsuir.khviasko.hotel.repository.AbstractRepository;
 import com.bsuir.khviasko.hotel.repository.reservation.ReservationRepository;
 
-import java.time.Duration;
 import java.util.List;
 
 public class ReservationRepositoryImpl extends AbstractRepository<Reservation> implements ReservationRepository {
@@ -17,8 +16,7 @@ public class ReservationRepositoryImpl extends AbstractRepository<Reservation> i
 
     @Override
     public double calculateTotalPrice(Room room, Reservation reservation) {
-        Duration duration = Duration.between(reservation.getStartDate(), reservation.getEndDate());
-        return duration.toDays() * room.getPrice();
+        return reservation.getDuration() * room.getPrice();
     }
 
     @Override

@@ -19,7 +19,7 @@ public abstract class AbstractRepository<T> implements Repository<T> {
     @Override
     public T findById(String id) {
         Session session = HibernateSessionCreator.getSessionFactory().openSession();
-        T entity = session.get(entityClass, id);
+        T entity = session.get(entityClass, Long.parseLong(id));
         session.close();
         return entity;
     }

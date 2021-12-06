@@ -33,12 +33,9 @@ public class ReserveRoomCommand implements Command {
     public void execute(BufferedReader reader, BufferedWriter writer, Gson gson, QueryWrapper queryWrapper) throws IOException {
         User user = userRepository.findById(queryWrapper.getUserId());
         Room room = gson.fromJson(reader.readLine(), Room.class);
-        String startDate = reader.readLine();
-        String endDate = reader.readLine();
 
         Reservation reservation = new Reservation();
-        reservation.setStartDate(LocalDate.parse(startDate));
-        reservation.setEndDate(LocalDate.parse(endDate));
+        //reservation.setDuration(LocalDate.parse(startDate));
         reservation.setRoom(room);
         reservation.setUser(user);
         reservation.setReservationStatus(reservationStatusRepository.findById("1"));
