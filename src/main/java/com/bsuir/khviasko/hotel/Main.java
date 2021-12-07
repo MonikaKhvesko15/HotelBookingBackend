@@ -7,19 +7,20 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Main {
-    private static ServerSocket serverSocket;
-    private static Socket clientSocket;
-
     public static void main(String[] args) {
-        System.out.println("Server starts");
+        System.out.println("Server has started");
+        ServerSocket server = null;
         try {
-            serverSocket = new ServerSocket(8080);
+            server = new ServerSocket(8080);
+            server.setReuseAddress(true);
+
             while (true) {
-                clientSocket = serverSocket.accept();
-                System.out.println("New connection IP: " + clientSocket.getInetAddress());
+                Socket client = server.accept();
+                System.out.println("New connection IP: " + client.getInetAddress().getHostAddress());
+
                 Thread thread = new Thread(() -> {
                                     StreamManager manager = new StreamManager();
-                                    manager.start(clientSocket);
+                                    manager.start(client);
                                 }, "");
                 thread.start();
             }

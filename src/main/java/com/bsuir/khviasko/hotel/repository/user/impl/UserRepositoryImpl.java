@@ -7,6 +7,8 @@ import com.bsuir.khviasko.hotel.repository.user.UserRepository;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.util.List;
+
 public class UserRepositoryImpl extends AbstractRepository<User> implements UserRepository {
 
     public UserRepositoryImpl() {
@@ -24,5 +26,14 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
         return user;
     }
 
+    @Override
+    public List<User> findAll() {
+        Session session = HibernateSessionCreator.getSessionFactory().openSession();
+        Query query = session.createQuery("from User u where u.isDeleted =:flag");
+        query.setParameter("flag", false);
+        List<User> entities = query.list();
+        session.close();
+        return entities;
+    }
 
 }

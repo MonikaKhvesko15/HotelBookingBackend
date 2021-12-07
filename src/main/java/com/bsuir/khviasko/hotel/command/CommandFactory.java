@@ -1,8 +1,11 @@
 package com.bsuir.khviasko.hotel.command;
 
-import com.bsuir.khviasko.hotel.command.impl.admin.AddUserCommand;
+import com.bsuir.khviasko.hotel.command.impl.admin.AddRoomCommand;
+import com.bsuir.khviasko.hotel.command.impl.admin.ApproveReservationCommand;
+import com.bsuir.khviasko.hotel.command.impl.admin.DeclineReservationCommand;
+import com.bsuir.khviasko.hotel.command.impl.admin.DeleteRoomCommand;
 import com.bsuir.khviasko.hotel.command.impl.admin.DeleteUserCommand;
-import com.bsuir.khviasko.hotel.command.impl.admin.EditReservationCommand;
+import com.bsuir.khviasko.hotel.command.impl.admin.EditRoomCommand;
 import com.bsuir.khviasko.hotel.command.impl.admin.ViewReservationsCommand;
 import com.bsuir.khviasko.hotel.command.impl.admin.ViewUsersCommand;
 import com.bsuir.khviasko.hotel.command.impl.common.LoginCommand;
@@ -13,7 +16,7 @@ import com.bsuir.khviasko.hotel.command.impl.user.ResetReservationCommand;
 import com.bsuir.khviasko.hotel.command.impl.user.ViewRoomsCommand;
 import com.bsuir.khviasko.hotel.command.impl.user.ViewSingleRoomCommand;
 import com.bsuir.khviasko.hotel.command.impl.user.ViewUserInformationCommand;
-import com.bsuir.khviasko.hotel.command.impl.user.ViewUserReservationsCommand;
+import com.bsuir.khviasko.hotel.command.impl.user.ViewUserReservationCommand;
 
 public class CommandFactory {
 
@@ -25,17 +28,20 @@ public class CommandFactory {
     private static final String VIEW_USER_COMMAND = "view_user";
     private static final String EDIT_USER_COMMAND = "edit_user";
     private static final String VIEW_ROOMS_COMMAND = "view_rooms";
-    private static final String VIEW_SINGLE_ROOM_COMMAND = "view_single_room";
+    private static final String VIEW_SINGLE_ROOM_COMMAND = "view_room";
     private static final String RESERVE_ROOM_COMMAND = "reserve_room";
     private static final String RESET_RESERVATION_COMMAND = "reset_reservation";
-    private static final String VIEW_USER_RESERVATIONS_COMMAND = "view_user_reservations";
+    private static final String VIEW_USER_RESERVATION_COMMAND = "view_user_reservation";
 
     //admin
     private static final String VIEW_USERS_COMMAND = "view_users";
-    private static final String ADD_USER_COMMAND = "add_user";
     private static final String DELETE_USER_COMMAND = "delete_user";
+    private static final String ADD_ROOM_COMMAND = "add_room";
+    private static final String DELETE_ROOM_COMMAND = "delete_room";
+    private static final String EDIT_ROOM_COMMAND = "edit_room";
     private static final String VIEW_RESERVATIONS_COMMAND = "view_reservations";
-    private static final String EDIT_RESERVATION_STATUS_COMMAND = "edit_reservation";
+    private static final String APPROVE_RESERVATION_COMMAND = "approve_reservation";
+    private static final String DECLINE_RESERVATION_COMMAND = "decline_reservation";
 
     public static Command create(String сommandName) {
         switch (сommandName) {
@@ -55,18 +61,24 @@ public class CommandFactory {
                 return new ReserveRoomCommand();
             case RESET_RESERVATION_COMMAND:
                 return new ResetReservationCommand();
-            case VIEW_USER_RESERVATIONS_COMMAND:
-                return new ViewUserReservationsCommand();
+            case VIEW_USER_RESERVATION_COMMAND:
+                return new ViewUserReservationCommand();
             case VIEW_USERS_COMMAND:
                 return new ViewUsersCommand();
-            case ADD_USER_COMMAND:
-                return new AddUserCommand();
             case DELETE_USER_COMMAND:
                 return new DeleteUserCommand();
             case VIEW_RESERVATIONS_COMMAND:
                 return new ViewReservationsCommand();
-            case EDIT_RESERVATION_STATUS_COMMAND:
-                return new EditReservationCommand();
+            case DELETE_ROOM_COMMAND:
+                return new DeleteRoomCommand();
+            case ADD_ROOM_COMMAND:
+                return new AddRoomCommand();
+            case EDIT_ROOM_COMMAND:
+                return new EditRoomCommand();
+            case APPROVE_RESERVATION_COMMAND:
+                return new ApproveReservationCommand();
+            case DECLINE_RESERVATION_COMMAND:
+                return new DeclineReservationCommand();
             default:
                 throw new IllegalArgumentException("No such this command");
         }

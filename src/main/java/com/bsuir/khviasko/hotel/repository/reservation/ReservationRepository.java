@@ -10,5 +10,5 @@ import java.util.List;
 public interface ReservationRepository extends Repository<Reservation> {
      double calculateTotalPrice(Room room, Reservation reservation);
 
-     List<Reservation> getUserReservations(User user);
+     Reservation getUserReservation(User user);
 }

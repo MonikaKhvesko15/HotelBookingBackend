@@ -7,4 +7,6 @@ public class QueryWrapper {
     private final String command;
     private final String userId;
     private final String role;
+    private final String roomId;
+    private final String reservationId;
 }

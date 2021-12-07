@@ -12,7 +12,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.sql.SQLException;
 
 public class StreamManager {
     public void start(Socket socket) {
@@ -24,9 +23,11 @@ public class StreamManager {
             InputStream inputStream = socket.getInputStream();
             BufferedReader bufferedReader =
                     new BufferedReader(new InputStreamReader(inputStream));
+
             while (true) {
                 process(bufferedWriter, bufferedReader);
             }
+
         } catch (Exception e) {
             System.out.println("Server connection error");
         }

@@ -1,4 +1,4 @@
-package com.bsuir.khviasko.hotel.command.impl.user;
+package com.bsuir.khviasko.hotel.command.impl.admin;
 
 import com.bsuir.khviasko.hotel.command.Command;
 import com.bsuir.khviasko.hotel.connection.QueryWrapper;
@@ -11,17 +11,16 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-public class ViewSingleRoomCommand implements Command {
-    RoomRepository roomRepository;
+public class EditRoomCommand implements Command {
+    private final RoomRepository roomRepository;
 
-    public ViewSingleRoomCommand() {
-        this.roomRepository = new RoomRepositoryImpl();
+    public EditRoomCommand() {
+        roomRepository = new RoomRepositoryImpl();
     }
 
     @Override
     public void execute(BufferedReader reader, BufferedWriter writer, Gson gson, QueryWrapper queryWrapper) throws IOException {
-        Room room = roomRepository.findById(queryWrapper.getRoomId());
-        writer.write(gson.toJson(room) + "\n");
-        writer.flush();
+        Room room = gson.fromJson(reader.readLine(), Room.class);
+        roomRepository.update(room);
     }
 }

@@ -20,7 +20,8 @@ public class DeleteUserCommand implements Command {
 
     @Override
     public void execute(BufferedReader reader, BufferedWriter writer, Gson gson, QueryWrapper queryWrapper) throws IOException {
-        User user = gson.fromJson(reader.readLine(), User.class);
-        userRepository.delete(user);
+        User user = userRepository.findById(queryWrapper.getUserId());
+        user.setDeleted(true);
+        userRepository.update(user);
     }
 }

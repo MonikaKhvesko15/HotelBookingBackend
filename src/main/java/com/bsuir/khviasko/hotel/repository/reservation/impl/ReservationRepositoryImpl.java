@@ -1,12 +1,13 @@
 package com.bsuir.khviasko.hotel.repository.reservation.impl;
 
+import com.bsuir.khviasko.hotel.config.HibernateSessionCreator;
 import com.bsuir.khviasko.hotel.entity.Reservation;
 import com.bsuir.khviasko.hotel.entity.Room;
 import com.bsuir.khviasko.hotel.entity.User;
 import com.bsuir.khviasko.hotel.repository.AbstractRepository;
 import com.bsuir.khviasko.hotel.repository.reservation.ReservationRepository;
-
-import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 public class ReservationRepositoryImpl extends AbstractRepository<Reservation> implements ReservationRepository {
     public ReservationRepositoryImpl() {
@@ -20,7 +21,12 @@ public class ReservationRepositoryImpl extends AbstractRepository<Reservation> i
     }
 
     @Override
-    public List<Reservation> getUserReservations(User user) {
-        return null;
+    public Reservation getUserReservation(User user) {
+        Session session = HibernateSessionCreator.getSessionFactory().openSession();
+        Query query = session.createQuery("from Reservation r where r.user =:user");
+        query.setParameter("user", user);
+        Reservation entity = (Reservation) query.uniqueResult();
+        session.close();
+        return entity;
     }
 }

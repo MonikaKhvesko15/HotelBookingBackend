@@ -2,9 +2,11 @@ package com.bsuir.khviasko.hotel.repository.room.impl;
 
 import com.bsuir.khviasko.hotel.config.HibernateSessionCreator;
 import com.bsuir.khviasko.hotel.entity.Room;
+import com.bsuir.khviasko.hotel.entity.User;
 import com.bsuir.khviasko.hotel.repository.AbstractRepository;
 import com.bsuir.khviasko.hotel.repository.room.RoomRepository;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -24,33 +26,13 @@ public class RoomRepositoryImpl extends AbstractRepository<Room> implements Room
     }
 
     @Override
-    public Map<String, Double> getChartData() {
+    public List<Room> findAll() {
         Session session = HibernateSessionCreator.getSessionFactory().openSession();
-        List<Room> rooms = findAll();
+        Query query = session.createQuery("from Room u where u.isDeleted =:flag");
+        query.setParameter("flag", false);
+        List<Room> entities = query.list();
         session.close();
-        Map<String, Double> map = new HashMap<>();
-        double standartAveragePrice = sumPriceByType(rooms, STANDARD) / countRoomsByType(rooms, STANDARD);
-        double businessAveragePrice = sumPriceByType(rooms, BUSINESS) / countRoomsByType(rooms, BUSINESS);
-        double luxAveragePrice = sumPriceByType(rooms, LUX) / countRoomsByType(rooms, LUX);
-        map.put(STANDARD, standartAveragePrice);
-        map.put(BUSINESS, businessAveragePrice);
-        map.put(LUX, luxAveragePrice);
-        return map;
+        return entities;
     }
 
-    private Double sumPriceByType(List<Room> rooms, String type) {
-        return Optional.ofNullable(rooms)
-                .orElse(Collections.emptyList()).stream()
-                .filter(Objects::nonNull)
-                .filter(room -> room.getRoomType().equals(type))
-                .mapToDouble(Room::getPrice).sum();
-    }
-
-    private long countRoomsByType(List<Room> rooms, String type) {
-        return Optional.ofNullable(rooms)
-                .orElse(Collections.emptyList()).stream()
-                .filter(Objects::nonNull)
-                .filter(room -> room.getRoomType().equals(type))
-                .count();
-    }
 }

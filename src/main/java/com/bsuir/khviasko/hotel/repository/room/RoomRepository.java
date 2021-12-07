@@ -6,5 +6,4 @@ import com.bsuir.khviasko.hotel.repository.Repository;
 import java.util.Map;
 
 public interface RoomRepository extends Repository<Room> {
-    Map<String, Double> getChartData();
 }
