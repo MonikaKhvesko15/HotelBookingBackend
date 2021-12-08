@@ -9,20 +9,20 @@ import java.net.Socket;
 public class Main {
     public static void main(String[] args) {
         System.out.println("Server has started");
-        ServerSocket server = null;
+        ServerSocket serverSocket = null;
+
         try {
-            server = new ServerSocket(8080);
-            server.setReuseAddress(true);
+            serverSocket = new ServerSocket(8080);
+            serverSocket.setReuseAddress(true);
 
             while (true) {
-                Socket client = server.accept();
-                System.out.println("New connection IP: " + client.getInetAddress().getHostAddress());
+                Socket clientSocket = serverSocket.accept();
+                System.out.println("New connection IP: " + clientSocket.getInetAddress().getHostAddress());
 
-                Thread thread = new Thread(() -> {
-                                    StreamManager manager = new StreamManager();
-                                    manager.start(client);
-                                }, "");
-                thread.start();
+                new Thread(() -> {
+                    StreamManager manager = new StreamManager();
+                    manager.start(clientSocket);
+                }, "").start();
             }
         } catch (IOException e) {
             e.printStackTrace();

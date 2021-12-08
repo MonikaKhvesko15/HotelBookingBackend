@@ -27,7 +27,12 @@ public class ViewUserReservationCommand implements Command {
     public void execute(BufferedReader reader, BufferedWriter writer, Gson gson, QueryWrapper queryWrapper) throws IOException {
         User user = userRepository.findById(queryWrapper.getUserId());
         Reservation reservation = reservationRepository.getUserReservation(user);
-        writer.write(gson.toJson(reservation) + "\n");
+
+        if(reservation == null){
+            writer.write(gson.toJson("EMPTY") + "\n");
+        }else {
+            writer.write(gson.toJson(reservation) + "\n");
+        }
         writer.flush();
     }
 }
